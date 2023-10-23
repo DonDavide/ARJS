@@ -2,14 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>AR.js y Acceso a la Cámara</title>
+    <title>Ejemplo de AR.js</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
-    <h1>Aplicación de Realidad Aumentada con Acceso a la Cámara</h1>
-    <button id="startButton">Iniciar cámara</button>
-    <video id="cameraStream" autoplay style="display: none;"></video>
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         <a-marker preset="hiro">
             <!-- Coloca el modelo 3D en este marcador -->
@@ -17,21 +14,5 @@
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
-
-    <script>
-        const startButton = document.getElementById('startButton');
-        const cameraStream = document.getElementById('cameraStream');
-        const aframeScene = document.querySelector('a-scene');
-
-        startButton.addEventListener('click', async () => {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                cameraStream.srcObject = stream;
-                aframeScene.style.display = 'block'; // Mostrar la escena de AR
-            } catch (error) {
-                console.error('Error al acceder a la cámara:', error);
-            }
-        });
-    </script>
 </body>
 </html>
