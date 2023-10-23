@@ -10,9 +10,22 @@
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         <a-marker preset="hiro">
             <!-- Coloca el modelo 3D en este marcador -->
-            <a-box position="0 0.5 0" rotation="0 90 0" width="0.1" height="0.1" depth="0.1" color="yellow"></a-box>
+            <a-box id="miModelo" position="0 0 0" rotation="0 0 0" width="0.1" height="0.1" depth="0.1" color="yellow"></a-box>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        // Obtiene el modelo y el marcador
+        const modelo = document.getElementById("miModelo");
+        const marcador = document.querySelector("a-marker[preset='hiro']");
+
+        // Escucha el evento "markerFound" cuando se detecta el marcador
+        marcador.addEventListener("markerFound", (event) => {
+            // Actualiza la posición del modelo para que esté alineado con el marcador
+            const posicionMarcador = marcador.object3D.position;
+            modelo.setAttribute("position", posicionMarcador);
+        });
+    </script>
 </body>
 </html>
